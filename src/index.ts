@@ -31,9 +31,7 @@ export default async function handler(
   } catch (err) {
     res.statusCode === 500;
     res.setHeader("Content-Type", "text/html");
-    res.end(
-      "<h1>Internal Server Error 500</h1><p>Sorry, an error occured.</p>"
-    );
+    res.end(`<h1>Internal Server Error</h1><p>${err}</p>`);
     console.error(err);
   }
 }
