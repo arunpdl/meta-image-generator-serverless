@@ -2,6 +2,9 @@ import { IncomingMessage, ServerResponse } from "http";
 import { parseReqs } from "./parser";
 import { getHtml } from "./template";
 import { writeTempFile } from "./file";
+import { getScreenshot } from "./chromium";
+
+const isDev = process.env.NOW_REGION === "dev1";
 
 export default async function handler(
   req: IncomingMessage,
@@ -15,11 +18,16 @@ export default async function handler(
     const fileName = [title, author].join("-");
     const filePath = await writeTempFile(fileName, html);
     const fileUrl = `file://${filePath}`;
-    console.log(fileUrl);
+
+    const file = await getScreenshot(fileUrl, isDev);
 
     res.statusCode === 200;
-    res.setHeader("Content-Type", "text/html");
-    res.end(html);
+    res.setHeader("Content-Type", "image/jpeg");
+    res.setHeader(
+      "Cache-Control",
+      "public,immutable,no-transform,max-age=21600,s-max-age=21600"
+    );
+    res.end(file);
   } catch (err) {
     res.statusCode === 500;
     res.setHeader("Content-Type", "text/html");
