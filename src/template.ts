@@ -1,9 +1,10 @@
 function getCss() {
-    return `
+  return `
     body {
         color: #fff;
         font-family: "Open Sans";
         background-color: #fff;
+        height: 100%;
       }
       
       .banner {
@@ -72,12 +73,12 @@ function getCss() {
       }
       
     `;
-};
+}
 
 export const getHtml = (parsedReqs: ParsedReqs) => {
-    const { author, title, website, image } = parsedReqs;
+  const { author, title, website, image } = parsedReqs;
 
-    return `
+  return `
     <!DOCTYPE html>
 <html lang="en">
 <head>

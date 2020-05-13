@@ -3,10 +3,10 @@
   "public": false,
   "builds": [
     {
-      "src": "src/card.ts",
+      "src": "src/index.ts",
       "use": "@now/node",
       "config": { "maxLambdaSize": "36mb" }
     }
   ],
-  "routes": [{ "src": "/meta-image.jpg", "dest": "/src/card.ts" }]
+  "routes": [{ "src": "/meta-image.jpg", "dest": "/src/index.ts" }]
 }
